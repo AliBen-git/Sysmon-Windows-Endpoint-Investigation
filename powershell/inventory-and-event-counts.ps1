@@ -19,7 +19,7 @@ foreach ($file in $files) {
     Write-Host "`n=== $($file.Name) ===" -ForegroundColor Cyan
 
     try {
-        Get-WinEvent -LiteralPath $file.FullName -ErrorAction Stop |
+        Get-WinEvent -Path $file.FullName -ErrorAction Stop |
             Group-Object -Property Id |
             Sort-Object { [int]$_.Name } |
             Select-Object @{Name = "EventID"; Expression = { [int]$_.Name }}, Count
