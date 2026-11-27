@@ -6,7 +6,7 @@ param(
     [string]$CsvPath
 )
 
-$processEvents = Get-WinEvent -LiteralPath $EvtxPath -FilterXPath "*[System[(EventID=1)]]" |
+$processEvents = Get-WinEvent -Path $EvtxPath -FilterXPath "*[System[(EventID=1)]]" |
     ForEach-Object {
         $event = $_
         [xml]$xml = $event.ToXml()
@@ -46,7 +46,7 @@ if ($CsvPath) {
 $start = [datetime]"2019-07-26 09:39:10"
 $end   = [datetime]"2019-07-26 09:39:20"
 
-Get-WinEvent -LiteralPath $EvtxPath |
+Get-WinEvent -Path $EvtxPath |
     Where-Object {
         $_.Id -in 3, 11, 22 -and
         $_.TimeCreated -ge $start -and
