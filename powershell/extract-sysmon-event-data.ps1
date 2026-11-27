@@ -7,7 +7,7 @@ param(
     [int]$EventId
 )
 
-Get-WinEvent -LiteralPath $EvtxPath -ErrorAction Stop |
+Get-WinEvent -Path $EvtxPath -ErrorAction Stop |
     Where-Object { $_.Id -eq $EventId } |
     ForEach-Object {
         $event = $_
