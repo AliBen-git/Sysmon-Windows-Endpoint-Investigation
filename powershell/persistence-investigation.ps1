@@ -4,7 +4,7 @@ param(
     [string]$EvtxPath
 )
 
-Get-WinEvent -LiteralPath $EvtxPath -FilterXPath "*[System[(EventID=13)]]" |
+Get-WinEvent -Path $EvtxPath -FilterXPath "*[System[(EventID=13)]]" |
     ForEach-Object {
         $event = $_
         [xml]$xml = $event.ToXml()
