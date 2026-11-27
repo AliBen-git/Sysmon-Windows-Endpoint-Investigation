@@ -73,6 +73,52 @@ A time-bounded check for Sysmon Event IDs 3, 11, and 22 between 09:39:10 and 09:
 
 **Interpretation boundary:** The process telemetry provides strong evidence of a suspicious execution attempt. The supplied evidence does not confirm that the download succeeded, that retrieved code executed, or that further files were created.
 
+## Evidence screenshots
+
+The screenshots below document the main investigation steps and supporting PowerShell output. They are presented in the same order as the investigations.
+
+### 1. EVTX inventory and event counts
+
+Overview of the event-log data and the event IDs available for analysis.
+
+![EVTX inventory and event counts](screenshots/01-evtx-inventory.png)
+
+### 2. USB registry and device identification
+
+Registry telemetry identifying the SanDisk U3 Cruzer Micro device.
+
+![USB registry event](screenshots/02-usb-registry-event.png)
+
+### 3. USB raw access activity
+
+Sysmon Event ID 9 records raw access involving `\\Device\\HarddiskVolume3`. This does not independently prove a file transfer.
+
+![USB raw access](screenshots/03-usb-raw-access.png)
+
+### 4. Registry persistence indicator
+
+The Event ID 13 record shows the Run-key value set by `a.exe`. It supports a persistence-attempt assessment, not proof of later execution.
+
+![Registry persistence event](screenshots/04-registry-persistence.png)
+
+### 5. CHM process chain
+
+Process creation telemetry showing the observed relationship between Explorer, HTML Help (`hh.exe`), and Command Prompt.
+
+![CHM process chain](screenshots/05-chm-process-chain.png)
+
+### 6. Suspicious command-line details
+
+The command line contains the attempted copy/launch sequence and JavaScript/WinHTTP retrieval logic. The screenshot documents the command, not successful remote content execution.
+
+![Suspicious command line](screenshots/06-suspicious-command-line.png)
+
+### 7. CSV export and validation
+
+PowerShell output documenting the CSV export and validation workflow.
+
+![CSV export validation](screenshots/07-csv-export-validation.png)
+
 ## Technical workflow
 
 - Inventory EVTX evidence files.
