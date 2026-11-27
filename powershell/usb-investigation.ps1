@@ -5,7 +5,7 @@ param(
 )
 
 # Event ID 13: registry values that recorded SanDisk USB device information.
-Get-WinEvent -LiteralPath $EvtxPath -FilterXPath "*[System[(EventID=13)]]" |
+Get-WinEvent -Path $EvtxPath -FilterXPath "*[System[(EventID=13)]]" |
     ForEach-Object {
         $event = $_
         [xml]$xml = $event.ToXml()
@@ -24,7 +24,7 @@ Get-WinEvent -LiteralPath $EvtxPath -FilterXPath "*[System[(EventID=13)]]" |
     } | Format-List
 
 # Event ID 9: raw access read events. Device-to-USB mapping requires separate validation.
-Get-WinEvent -LiteralPath $EvtxPath -FilterXPath "*[System[(EventID=9)]]" |
+Get-WinEvent -Path $EvtxPath -FilterXPath "*[System[(EventID=9)]]" |
     ForEach-Object {
         $event = $_
         [xml]$xml = $event.ToXml()
@@ -43,7 +43,7 @@ Get-WinEvent -LiteralPath $EvtxPath -FilterXPath "*[System[(EventID=9)]]" |
     } | Format-Table -AutoSize -Wrap
 
 # Event IDs 1 and 5: process creation and termination for the recorded timeline.
-Get-WinEvent -LiteralPath $EvtxPath |
+Get-WinEvent -Path $EvtxPath |
     Where-Object { $_.Id -in 1, 5 } |
     Sort-Object TimeCreated |
     Select-Object TimeCreated, Id, Message |
