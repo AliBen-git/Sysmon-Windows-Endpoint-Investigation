@@ -1,6 +1,17 @@
 # Sysmon Windows Endpoint Investigation
 
-A practical Blue Team / SOC / DFIR lab focused on investigating Windows telemetry with Sysmon, PowerShell, EVTX event logs, XML parsing, and CSV exports.
+A practical Blue Team / SOC / DFIR investigation lab using Sysmon and PowerShell to analyse Windows endpoint telemetry, reconstruct process activity, investigate registry persistence indicators, and document evidence from EVTX files.
+
+> **Project type:** Educational lab / portfolio case study  
+> **Status:** Analysis documented; reusable scripts prepared. The scripts have not yet been independently re-run against the original EVTX files as part of this repository review.
+
+## What this project demonstrates
+
+- Windows endpoint investigation using Sysmon EVTX data.
+- Extraction and interpretation of structured EventData through PowerShell and XML.
+- Process ancestry analysis using image names, command lines, and Process GUIDs.
+- Review of registry modifications associated with potential persistence.
+- Evidence-based reporting that separates observed events from hypotheses and unknowns.
 
 ## Project scope
 
@@ -118,6 +129,17 @@ The command line contains the attempted copy/launch sequence and JavaScript/WinH
 PowerShell output documenting the CSV export and validation workflow.
 
 ![CSV export validation](screenshots/07-csv-export-validation.png)
+
+## Investigation workflow
+
+1. Inventory the supplied EVTX files and establish Event ID coverage.
+2. Extract relevant Sysmon fields from event XML.
+3. Build event timelines and review process parent-child relationships.
+4. Examine USB-related registry and raw-access telemetry.
+5. Assess the Run-key modification and attempt process correlation.
+6. Reconstruct the CHM/HTA-related process chain and inspect its command line.
+7. Check the documented time window for related network, file-create, and DNS telemetry.
+8. Export selected process data to CSV and validate the output.
 
 ## Technical workflow
 
